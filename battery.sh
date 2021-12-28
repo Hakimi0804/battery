@@ -1,10 +1,17 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 # Most of these useless comment lines are for github copilot
 # (and the one that starts with shellheck is for shellcheck ovbiously)
 nodepath="/sys/class/power_supply/battery";
 design_capacity=4300;
 config_enable_vooc=1;
 config_voltage_unit=milivolt;
+path_current="$nodepath/current_now";
+path_voltage="$nodepath/voltage_now";
+path_capacity="$nodepath/capacity";
+path_status="$nodepath/status";
+path_temp="$nodepath/temp";
+path_voocchg_ing="$nodepath/voocchg_ing";
+path_fastcharger="$nodepath/fastcharger";
 
 
 # if utils doesn't exist, wattage will not be calculated
@@ -36,18 +43,22 @@ while true; do
     echo "${green}voocchg_ing: ${bold_white}$voocchg_ing";
     echo "${green}fastcharger: ${bold_white}$fastcharger";
   fi
+  
   echo;
   echo "${cyan}Health Info";
   echo "${green}Battery Health: ${bold_white}$batt_fcc/$design_capacity (${batt_fcc_percentage}%)";
   
 
-  current=$(sudo cat $nodepath/current_now);
-  capacity=$(sudo cat $nodepath/capacity);
-  temp=$(sudo cat $nodepath/temp);
-  voltage=$(sudo cat $nodepath/voltage_now);
-  status=$(sudo cat $nodepath/status);
-  voocchg_ing=$(sudo cat $nodepath/voocchg_ing);
-  fastcharger=$(sudo cat $nodepath/fastcharger);
+  current=$(sudo cat $path_current);
+  capacity=$(sudo cat $path_capacity);
+  temp=$(sudo cat $path_temp);
+  voltage=$(sudo cat $path_voltage);
+  status=$(sudo cat $path_status);
+  
+  if [[ $config_enable_vooc == 1 ]]; then
+    voocchg_ing=$(sudo cat $path_voocchg_ing);
+    fastcharger=$(sudo cat $path_fastcharger);
+  fi
 
   batt_fcc=$(sudo cat $nodepath/batt_fcc);
   calc_wattage;
