@@ -4,7 +4,7 @@
 nodepath="/sys/class/power_supply/battery";
 design_capacity=4300;
 config_enable_vooc=1;
-config_voltage_unit=milivolt;
+config_voltage_unit="microvolt";
 path_current="$nodepath/current_now";
 path_voltage="$nodepath/voltage_now";
 path_capacity="$nodepath/capacity";
@@ -43,7 +43,7 @@ while true; do
     echo "${green}voocchg_ing: ${bold_white}$voocchg_ing";
     echo "${green}fastcharger: ${bold_white}$fastcharger";
   fi
-  
+
   echo;
   echo "${cyan}Health Info";
   echo "${green}Battery Health: ${bold_white}$batt_fcc/$design_capacity (${batt_fcc_percentage}%)";
