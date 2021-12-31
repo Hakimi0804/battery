@@ -20,6 +20,7 @@ Just like design capacity, you can override the path. Most of the time this line
 ### wrong voltage reading
 - If the voltage is too small, you'll need to set the voltage unit to milivolt
 - If the voltage is too large, you'll need to set the voltage unit to microvolt
+
 Use one of the following lines depending on what voltage is broken (battery voltage/USB voltage)
 
 `config_voltage_unit="microvolt/milivolt"`
