@@ -1,16 +1,16 @@
-# battery
+# BATTERY
 Was gonna keep this private but someone requested it 🤷‍♂️ sooo
 don't complain about it being stupid or anything.
 However issues are welcome.
 
-## convenience
+## CONVENIENCE
 Since this script is made public, I made things a bit more convenient by storing literally everything in a variable. If you need to override any of the stock value, simply add the variable(s) that you want to override in battery.conf file so that you won't have to modify the script.
 
-## how to use
+## HOW TO USE
 1. Download the script: `curl https://raw.githubusercontent.com/Hakimi0804/battery/master/battery.sh -so battery.sh`
 2. Execute it: `bash battery.sh`
 
-## troubleshooting & extras
+## TROUBLESHOOTING & EXTRAS
 ### design capacity is wrong!
 Well, that's where the battery.conf comes in handy. Use it to overwrite the default design capacity variable. Add this line to do so: `design_capacity=your_device_design_capacity`
 
@@ -27,7 +27,7 @@ Use one of the following lines depending on what voltage is broken (battery volt
 
 `config_voltage_unit_usb="microvolt/milivolt"`
 
-## credits
+## CREDITS
 - myself
 - 🤷‍♂️
 - 🤷‍♂️
