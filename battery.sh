@@ -16,7 +16,6 @@ path_voocchg_ing="$nodepath/voocchg_ing";
 path_fastcharger="$nodepath/fastcharger";
 
 
-# if utils doesn't exist, wattage will not be calculated
 if [ ! -f battery-utils.sh ]; then
   echo "battery-utils.sh not found, downloading";
   curl -s https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh -o battery-utils.sh;
