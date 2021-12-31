@@ -4,7 +4,7 @@
 # make sure required commands exist. if not, install them
 required_commands=( sudo tput bc wget );
 for command in "${required_commands[@]}"; do
-  if ! command -v "$command" >/dev/null 2>&1; then
+  if ! command -v "$command" &>/dev/null; then
     req_cmd_err=1;
   fi
 done
