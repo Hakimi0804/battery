@@ -45,7 +45,7 @@ while true; do
   fi
 
   if [ "$config_voltage_usb_unit" = "microvolt" ]; then
-    echo "${green}voltage: ${bold_white}${voltage_usb}µV ($(bc -l <<< "$voltage_usb / 1000" | sed 's/\..*//')mV)";
+    echo "${green}USB voltage: ${bold_white}${voltage_usb}µV ($(bc -l <<< "$voltage_usb / 1000" | sed 's/\..*//')mV)";
   else
     echo "${green}USB voltage: ${bold_white}${voltage_usb}mV";
   fi
