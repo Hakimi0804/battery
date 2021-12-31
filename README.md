@@ -1,5 +1,5 @@
 # battery
-Was gonna keep this public but someone requested it 🤷‍♂️ sooo
+Was gonna keep this private but someone requested it 🤷‍♂️ sooo
 don't complain about it being stupid or anything.
 However issues are welcome.
 
