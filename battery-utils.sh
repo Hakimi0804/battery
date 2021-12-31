@@ -2,7 +2,7 @@
 # shellcheck shell=bash
 
 # make sure required commands exist. if not, install them
-required_commands=( tput bc wget );
+required_commands=( sudo tput bc wget );
 for command in "${required_commands[@]}"; do
   if ! command -v "$command" >/dev/null 2>&1; then
     req_cmd_err=1;
@@ -11,7 +11,7 @@ done
 
 if [ "$req_cmd_err" -eq 1 ]; then
   echo "Required commands not found, installing...";
-  pkg install -y ncurses-utils wget bc &>/dev/null;
+  pkg install -y tsu ncurses-utils wget bc &>/dev/null;
 fi
 
 # colours
