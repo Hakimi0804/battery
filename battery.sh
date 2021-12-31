@@ -35,7 +35,7 @@ while true; do
   echo "${cyan}General Info";
   echo "${green}status: ${bold_white}$status";
   echo "${green}capacity: ${bold_white}${capacity}%";
-  echo "${green}current: ${bold_white}$current ($(echo "$current" | sed 's/-//')mA)";
+  echo "${green}current: ${bold_white}$current (${current//-/}mA)";
 
   if [ "$config_voltage_unit" = "microvolt" ]; then
     echo "${green}voltage: ${bold_white}${voltage}µV ($(bc -l <<< "$voltage / 1000" | sed 's/\..*//')mV)";
