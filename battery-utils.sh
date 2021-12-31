@@ -1,4 +1,4 @@
-#!/bin/false 
+#!/data/data/com.termux/files/usr/bin/false
 # shellcheck shell=bash
 
 # make sure required commands exist. if not, install them
