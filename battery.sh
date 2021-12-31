@@ -19,7 +19,7 @@ path_fastcharger="$nodepath/fastcharger";
 # if utils doesn't exist, wattage will not be calculated
 if [ ! -f battery-utils.sh ]; then
   echo "battery-utils.sh not found, downloading";
-  wget -q https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh;
+  curl -s https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh -o battery-utils.sh;
 fi
 if [ ! -f battery.conf ]; then
   echo "Configuration file not found, using default configuration";
