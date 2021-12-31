@@ -29,6 +29,19 @@ calc_wattage() {
   local current=${current//-/};
   current_1=$(bc -l <<< "$current / 1000");
 
+  if [ "$1" = "usb" ]; then
+    local voltage=$voltage_usb;
+    local usb=true
+  fi
+
+  if [ "$usb" = "true" ]; then
+    if [ "$config_voltage_usb_unit" = "microvolt" ]; then
+      local config_voltage_unit="microvolt"
+    else
+      local config_voltage_unit="milivolt"
+    fi
+  fi
+
   if [ "$config_voltage_unit" = "microvolt" ]; then
     voltage_1=$(bc -l <<< "$voltage / 1000000");
   else
@@ -36,7 +49,13 @@ calc_wattage() {
   fi
 
   pre_wattage=$(bc -l <<< "$current_1 * $voltage_1");
-  wattage=$(round $pre_wattage 2);
+
+  if [ "$1" = "usb" ]; then
+    wattage_usb=$(round "$pre_wattage" 2);
+  else
+    wattage=$(round "$pre_wattage" 2);
+  fi
+
 }
 
 calc_bathealth() {

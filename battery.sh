@@ -5,8 +5,10 @@ nodepath="/sys/class/power_supply/battery";
 design_capacity=4300;
 config_enable_vooc=1;
 config_voltage_unit="microvolt";
+config_voltage_usb_unit="milivolt";
 path_current="$nodepath/current_now";
 path_voltage="$nodepath/voltage_now";
+path_voltage_usb="$nodepath/../usb/device/ADC_Charger_Voltage";
 path_capacity="$nodepath/capacity";
 path_status="$nodepath/status";
 path_temp="$nodepath/temp";
@@ -35,8 +37,21 @@ while true; do
   echo "${green}status: ${bold_white}$status";
   echo "${green}capacity: ${bold_white}${capacity}%";
   echo "${green}current: ${bold_white}$current ($(echo "$current" | sed 's/-//')mA)";
-  echo "${green}voltage: ${bold_white}${voltage}mV";
+
+  if [ "$config_voltage_unit" = "microvolt" ]; then
+    echo "${green}voltage: ${bold_white}${voltage}µV ($(bc -l <<< "$voltage / 1000" | sed 's/\..*//')mV)";
+  else
+    echo "${green}voltage: ${bold_white}${voltage}mV";
+  fi
+
+  if [ "$config_voltage_usb_unit" = "microvolt" ]; then
+    "${green}voltage: ${bold_white}${voltage_usb}µV ($(bc -l <<< "$voltage_usb / 1000" | sed 's/\..*//')mV)";
+  else
+    echo "${green}USB voltage: ${bold_white}${voltage_usb}mV";
+  fi
+
   echo "${green}wattage: ${bold_white}${wattage}W";
+  echo "${green}USB wattage: ${bold_white}${wattage_usb}W";
   echo "${green}temp: ${bold_white}$(echo $temp | sed 's/\B[0-9]\{1\}\>/.&/')";
 
   if [[ $config_enable_vooc == 1 ]]; then
@@ -54,6 +69,7 @@ while true; do
   temp=$(sudo cat $path_temp);
   voltage=$(sudo cat $path_voltage);
   status=$(sudo cat $path_status);
+  voltage_usb=$(sudo cat $path_voltage_usb);
   
   if [[ $config_enable_vooc == 1 ]]; then
     voocchg_ing=$(sudo cat $path_voocchg_ing);
@@ -62,6 +78,7 @@ while true; do
 
   batt_fcc=$(sudo cat $nodepath/batt_fcc);
   calc_wattage;
+  calc_wattage usb;
   calc_bathealth;
 
   clear;
