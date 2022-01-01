@@ -33,6 +33,7 @@ source battery.conf 2>/dev/null;
 case $1 in
   -u | --update)
     updater
+    exit $?
     ;;
   *)
     # do nothing

@@ -70,8 +70,9 @@ updater() {
   wget https://raw.githubusercontent.com/Hakimi0804/battery/master/battery.sh -qO battery.sh || update_err=1;
   if [ "$update_err" = "1" ]; then
     echo "${red}Update failed, please try again later.";
-    exit 1;
+    return 1;
   else
     echo "${green}Update complete. Please run battery.sh again.";
+    return 0;
   fi
 }
