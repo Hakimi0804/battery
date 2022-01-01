@@ -2,6 +2,7 @@
 # Most of these useless comment lines are for github copilot
 # (and the one that starts with shellheck is for shellcheck ovbiously)
 nodepath="/sys/class/power_supply/battery";
+default_nodepath="$nodepath";
 design_capacity=4300;
 config_enable_vooc=1;
 config_voltage_unit="microvolt";
@@ -29,6 +30,19 @@ fi
 # shellcheck source=battery.conf
 source battery-utils.sh 2>/dev/null;
 source battery.conf 2>/dev/null;
+new_nodepath="$nodepath";
+# if the sourced config changed nodepath, we will need to reassign
+# path_* variables
+if [ "$default_nodepath" != "$new_nodepath" ]; then
+  path_current="$new_nodepath/current_now";
+  path_voltage="$new_nodepath/voltage_now";
+  path_voltage_usb="$new_nodepath/../usb/device/ADC_Charger_Voltage";
+  path_capacity="$new_nodepath/capacity";
+  path_status="$new_nodepath/status";
+  path_temp="$new_nodepath/temp";
+  path_voocchg_ing="$new_nodepath/voocchg_ing";
+  path_fastcharger="$new_nodepath/fastcharger";
+fi
 
 case $1 in
   -u | --update)
