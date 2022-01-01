@@ -1,6 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# Most of these useless comment lines are for github copilot
-# (and the one that starts with shellheck is for shellcheck ovbiously)
+# The comments that starts with shellcheck is to configure shellcheck, ignore it.
 nodepath="/sys/class/power_supply/battery";
 default_nodepath="$nodepath";
 design_capacity=4300;
@@ -17,6 +16,11 @@ path_voocchg_ing="$nodepath/voocchg_ing";
 path_fastcharger="$nodepath/fastcharger";
 
 
+# sanity check
+if ! command -v termux-fix-shebang &>/dev/null; then
+  echo "You are not using Termux, exiting";
+  exit 1;
+fi
 if [ ! -f battery-utils.sh ]; then
   echo "battery-utils.sh not found, downloading";
   curl -s https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh -o battery-utils.sh;
