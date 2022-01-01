@@ -30,6 +30,15 @@ fi
 source battery-utils.sh 2>/dev/null;
 source battery.conf 2>/dev/null;
 
+case $1 in
+  -u | --update)
+    updater
+    ;;
+  *)
+    # do nothing
+    ;;
+esac
+
 while true; do
 
   echo "${cyan}General Info";

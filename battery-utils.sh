@@ -62,3 +62,16 @@ calc_bathealth() {
   pre_batt_fcc_percentage=$(bc -l <<< "$batt_fcc / $design_capacity * 100");
   batt_fcc_percentage=$(round $pre_batt_fcc_percentage 2);
 }
+
+updater() {
+  echo "${cyan}Updating battery-utils.sh...";
+  wget https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh -qO battery-utils.sh || update_err=1;
+  echo "Updating battery.sh...";
+  wget https://raw.githubusercontent.com/Hakimi0804/battery/master/battery.sh -qO battery.sh || update_err=1;
+  if [ "$update_err" -eq 1 ]; then
+    echo "${red}Update failed, please try again later.";
+    exit 1;
+  else
+    echo "${green}Update complete. Please run battery.sh again.";
+  fi
+}
