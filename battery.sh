@@ -14,6 +14,7 @@ path_status="$nodepath/status";
 path_temp="$nodepath/temp";
 path_voocchg_ing="$nodepath/voocchg_ing";
 path_fastcharger="$nodepath/fastcharger";
+path_batt_fcc="$nodepath/batt_fcc";
 
 
 # sanity check
@@ -46,6 +47,7 @@ if [ "$default_nodepath" != "$new_nodepath" ]; then
   path_temp="$new_nodepath/temp";
   path_voocchg_ing="$new_nodepath/voocchg_ing";
   path_fastcharger="$new_nodepath/fastcharger";
+  path_batt_fcc="$new_nodepath/batt_fcc";
 fi
 
 case $1 in
@@ -103,7 +105,7 @@ while true; do
     fastcharger=$(sudo cat $path_fastcharger);
   fi
 
-  batt_fcc=$(sudo cat $nodepath/batt_fcc);
+  batt_fcc=$(sudo cat $path_batt_fcc);
   calc_wattage;
   calc_wattage usb;
   calc_bathealth;
