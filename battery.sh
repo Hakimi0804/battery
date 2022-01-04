@@ -57,10 +57,10 @@ case $1 in
     ;;
   -c | --config)
     # shellcheck disable=SC2068,SC2048
-    if [ "$#" -eq 3 ]; then
-      config_handler "$1" "$2" "$3"
-    elif [ "$#" -eq 2 ]; then
-      config_handler "$1" "$2"
+    if [ "$#" -eq 4 ]; then
+      config_handler "$2" "$3" "$4"
+    elif [ "$#" -eq 3 ]; then
+      config_handler "$2" "$3"
     else
       echo "${red}Invalid nummber of arguements: ${bold_white}$#";
       echo "Usage: battery.sh -c <action> <variable> [value]";
