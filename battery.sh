@@ -55,6 +55,22 @@ case $1 in
     updater
     exit $?
     ;;
+  -c | --config)
+    # shellcheck disable=SC2068,SC2048
+    if [ "$#" -eq 3 ]; then
+      config_handler "$1" "$2" "$3"
+    elif [ "$#" -eq 2 ]; then
+      config_handler "$1" "$2"
+    else
+      echo "${red}Invalid nummber of arguements: ${bold_white}$#";
+      echo "Usage: battery.sh -c <action> <variable> [value]";
+      echo "Example: battery.sh -c set enable_vooc 1";
+      echo "Example: battery.sh -c unset voltage_unit milivolt";
+      echo "Example: battery.sh -c get voltage_usb_unit${reset}";
+      exit 1;
+    fi
+    exit $?
+    ;;
   *)
     # do nothing
     ;;

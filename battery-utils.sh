@@ -76,3 +76,49 @@ updater() {
     return 0;
   fi
 }
+
+config_handler() {
+  action="$1";
+  variable="$2";
+  value="$3";
+
+  # we store the config in a file called battery.conf
+  # actions: set, unset, get
+  case "$action" in
+    set)
+      if [ "$#" -eq 3 ]; then
+      # remove existing config line if it exists
+        sed -i "/^$variable/d" battery.conf;
+        # sed -i 's/\n//g' battery.conf;
+        echo "$variable=$value" >> battery.conf;
+        return $?;
+      else
+        return 1;
+      fi
+      ;;
+
+    unset)
+      if [ "$#" -eq 2 ]; then
+        sed -i "/$variable/d" battery.conf;
+        # sed -i 's/\n//g' battery.conf;
+        return $?;
+      else
+        return 1;
+      fi
+      ;;
+
+    get)
+      if [ "$#" -eq 2 ]; then
+        grep "$variable" battery.conf;
+        return $?;
+      else
+        return 1;
+      fi
+      ;;
+
+    *)
+      echo "Invalid action.";
+      return 1;
+      ;;
+  esac
+}
