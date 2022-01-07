@@ -22,6 +22,10 @@ bold_white=$(tput bold; tput setaf 7)
 reset=$(tput sgr 0)
 
 round() {
+  # round function made by github copilot
+  # usage: round <number> <decimal places>
+  # example: round 1.2345 2
+  # returns: 1.23
   echo $(printf %.$2f $(echo "scale=$2;(((10^$2)*$1)+0.5)/(10^$2)" | bc));
 }
 
