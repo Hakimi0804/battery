@@ -10,8 +10,8 @@ Since this script is made public, I made things a bit more convenient by storing
 1. Download the script: `curl https://raw.githubusercontent.com/Hakimi0804/battery/master/battery.sh -so battery.sh`
 2. Execute it: `bash battery.sh`
 
-## TROUBLESHOOTING & EXTRAS
-### design capacity is wrong!
+## TROUBLESHOOTING
+### design capacity is wrong
 Well, that's where the battery.conf comes in handy. Use it to overwrite the default design capacity variable. Add this line to do so: `design_capacity=your_device_design_capacity`
 
 ### USB voltage is throwing error
@@ -27,9 +27,51 @@ Use one of the following lines depending on what voltage is broken (battery volt
 
 `config_voltage_unit_usb="microvolt/milivolt"`
 
+## EXTRAS
+### updating the script
+*Arguement to pass: `-u`, `--update`*
+
+`bash battery.sh -u`
+or
+`bash battery.sh --update`
+
+### overriding default values through the script itself
+You can override default value by adding them to a file named battery.conf. In addition, you can use the provided tool to achieve that.
+
+*Arguements to pass: `-c`, `--config` `<set/unset/get>` `[value]`*
+
+*Available actions: set, unset, get*
+
+**Examples:**
+
+`bash battery.sh -c set path_voltage_usb /sys/class/power_supply/usb/voltage_now`
+
+`bash battery.sh -c unset path_voltage_usb`
+
+`bash battery.sh -c get path_voltage_usb`
+
+### stock values list
+```
+nodepath="/sys/class/power_supply/battery"
+default_nodepath="$nodepath"
+design_capacity=4300
+config_enable_vooc=1
+config_voltage_unit="microvolt"
+config_voltage_usb_unit="milivolt"
+path_current="$nodepath/current_now"
+path_voltage="$nodepath/voltage_now"
+path_voltage_usb="$nodepath/../usb/device/ADC_Charger_Voltage"
+path_capacity="$nodepath/capacity"
+path_status="$nodepath/status"
+path_temp="$nodepath/temp"
+path_voocchg_ing="$nodepath/voocchg_ing"
+path_fastcharger="$nodepath/fastcharger"
+path_batt_fcc="$nodepath/batt_fcc"
+```
+
 ## CREDITS
 - myself
-- 🤷‍♂️
+- GitHub Copilot for the rounding function and generally giving accurate suggestion so that I don't have to type everything by hand
 - 🤷‍♂️
 - 🤷‍♂️
 - 🤷‍♂️
