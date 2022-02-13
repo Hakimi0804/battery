@@ -79,34 +79,34 @@ esac
 while true; do
 
   echo "${cyan}General Info";
-  echo "${green}status: ${bold_white}$status";
-  echo "${green}capacity: ${bold_white}${capacity}%";
-  echo "${green}current: ${bold_white}$current (${current//-/}mA)";
+  echo -e "${green}status  \t: ${bold_white}$status";
+  echo -e "${green}capacity\t: ${bold_white}${capacity}%";
+  echo -e "${green}current \t: ${bold_white}$current (${current//-/}mA)";
 
   if [ "$config_voltage_unit" = "microvolt" ]; then
-    echo "${green}voltage: ${bold_white}${voltage}µV ($(bc -l <<< "$voltage / 1000" | sed 's/\..*//')mV)";
+    echo -e "${green}voltage \t: ${bold_white}${voltage}µV ($(bc -l <<< "$voltage / 1000" | sed 's/\..*//')mV)";
   else
-    echo "${green}voltage: ${bold_white}${voltage}mV";
+    echo -e "${green}voltage \t: ${bold_white}${voltage}mV";
   fi
 
   if [ "$config_voltage_usb_unit" = "microvolt" ]; then
-    echo "${green}USB voltage: ${bold_white}${voltage_usb}µV ($(bc -l <<< "$voltage_usb / 1000" | sed 's/\..*//')mV)";
+    echo -e "${green}USB voltage\t: ${bold_white}${voltage_usb}µV ($(bc -l <<< "$voltage_usb / 1000" | sed 's/\..*//')mV)";
   else
-    echo "${green}USB voltage: ${bold_white}${voltage_usb}mV";
+    echo -e "${green}USB voltage\t: ${bold_white}${voltage_usb}mV";
   fi
 
-  echo "${green}wattage: ${bold_white}${wattage}W";
-  echo "${green}USB wattage: ${bold_white}${wattage_usb}W";
-  echo "${green}temp: ${bold_white}$(echo $temp | sed 's/\B[0-9]\{1\}\>/.&/')";
+  echo -e "${green}wattage \t: ${bold_white}${wattage}W";
+  echo -e "${green}USB wattage\t: ${bold_white}${wattage_usb}W";
+  echo -e "${green}temp \t\t: ${bold_white}$(echo -e $temp | sed 's/\B[0-9]\{1\}\>/.&/')";
 
   if [[ $config_enable_vooc == 1 ]]; then
-    echo "${green}voocchg_ing: ${bold_white}$voocchg_ing";
-    echo "${green}fastcharger: ${bold_white}$fastcharger";
+    echo -e "${green}voocchg_ing\t: ${bold_white}$voocchg_ing";
+    echo -e "${green}fastcharger\t: ${bold_white}$fastcharger";
   fi
 
   echo;
   echo "${cyan}Health Info";
-  echo "${green}Battery Health: ${bold_white}$batt_fcc/$design_capacity (${batt_fcc_percentage}%)";
+  echo -e "${green}Battery Health\t: ${bold_white}$batt_fcc/$design_capacity (${batt_fcc_percentage}%)";
   
 
   current=$(sudo cat $path_current);
