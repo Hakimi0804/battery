@@ -6,6 +6,7 @@ design_capacity=4300;
 config_enable_vooc=1;
 config_voltage_unit="microvolt";
 config_voltage_usb_unit="milivolt";
+config_force_allow_for_non_termux=false;
 path_current="$nodepath/current_now";
 path_voltage="$nodepath/voltage_now";
 path_voltage_usb="$nodepath/../usb/device/ADC_Charger_Voltage";
@@ -18,10 +19,6 @@ path_batt_fcc="$nodepath/batt_fcc";
 
 
 # sanity check
-if ! command -v termux-fix-shebang &>/dev/null; then
-  echo "You are not using Termux, exiting";
-  exit 1;
-fi
 if [ ! -f battery-utils.sh ]; then
   echo "battery-utils.sh not found, downloading";
   curl -s https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh -o battery-utils.sh;
@@ -48,6 +45,12 @@ if [ "$default_nodepath" != "$new_nodepath" ]; then
   path_voocchg_ing="$new_nodepath/voocchg_ing";
   path_fastcharger="$new_nodepath/fastcharger";
   path_batt_fcc="$new_nodepath/batt_fcc";
+fi
+
+
+if ! command -v termux-fix-shebang &>/dev/null && [[ $config_force_allow_for_non_termux != true ]]; then
+  echo "You are not using Termux, exiting";
+  exit 1;
 fi
 
 case $1 in

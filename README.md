@@ -58,6 +58,7 @@ design_capacity=4300
 config_enable_vooc=1
 config_voltage_unit="microvolt"
 config_voltage_usb_unit="milivolt"
+config_force_allow_for_non_termux=false
 path_current="$nodepath/current_now"
 path_voltage="$nodepath/voltage_now"
 path_voltage_usb="$nodepath/../usb/device/ADC_Charger_Voltage"
