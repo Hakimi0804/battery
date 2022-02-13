@@ -9,6 +9,12 @@ for command in "${required_commands[@]}"; do
   fi
 done
 
+# Prevent from running without root access
+if [ -n "$(command -v sudo)" ] && ! sudo touch /cache/test &>/dev/null; then
+  echo "Termux's sudo was found, but no root access available, exiting";
+  exit 1;
+fi
+
 if [ "$req_cmd_err" -eq 1 ]; then
   echo "Required commands not found, installing...";
   pkg update -y &>/dev/null;
