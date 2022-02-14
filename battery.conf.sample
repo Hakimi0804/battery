@@ -1,7 +1,8 @@
-# configuration file.
-# this file will be sourced by the main script.
+# Sample configuration file.
+# Copy this file into a file named battery.conf and override
+# the configuration there, it will be sourced by the main script.
 #
-# the following variables are available:
+# The following variables are available:
 #
 # nodepath="/sys/class/power_supply/battery"
 # design_capacity=4300
