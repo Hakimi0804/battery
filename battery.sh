@@ -28,6 +28,13 @@ if [ ! -f battery.conf ]; then
   sleep 2;
 fi
 
+# Major refresh speed improvement
+if [ "$UID" = 0 ]; then
+    readonly PREFIX=""
+else
+    readonly PREFIX=sudo
+fi
+
 # shellcheck source=battery-utils.sh
 # shellcheck source=battery.conf
 source battery-utils.sh 2>/dev/null;
@@ -112,19 +119,19 @@ while true; do
   echo -e "${green}Battery Health\t: ${bold_white}$batt_fcc/$design_capacity (${batt_fcc_percentage}%)";
   
 
-  current=$(sudo cat $path_current);
-  capacity=$(sudo cat $path_capacity);
-  temp=$(sudo cat $path_temp);
-  voltage=$(sudo cat $path_voltage);
-  status=$(sudo cat $path_status);
-  voltage_usb=$(sudo cat $path_voltage_usb);
+  current=$($PREFIX cat $path_current);
+  capacity=$($PREFIX cat $path_capacity);
+  temp=$($PREFIX cat $path_temp);
+  voltage=$($PREFIX cat $path_voltage);
+  status=$($PREFIX cat $path_status);
+  voltage_usb=$($PREFIX cat $path_voltage_usb);
   
   if [[ $config_enable_vooc == 1 ]]; then
-    voocchg_ing=$(sudo cat $path_voocchg_ing);
-    fastcharger=$(sudo cat $path_fastcharger);
+    voocchg_ing=$($PREFIX cat $path_voocchg_ing);
+    fastcharger=$($PREFIX cat $path_fastcharger);
   fi
 
-  batt_fcc=$(sudo cat $path_batt_fcc);
+  batt_fcc=$($PREFIX cat $path_batt_fcc);
   calc_wattage;
   calc_wattage usb;
   calc_bathealth;
