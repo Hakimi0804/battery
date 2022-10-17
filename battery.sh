@@ -22,7 +22,7 @@ text=()
 # sanity check
 if [ ! -f battery-utils.sh ]; then
   echo "battery-utils.sh not found, downloading";
-  curl -s https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh -o battery-utils.sh;
+  curl https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh --progress-bar -o battery-utils.sh;
 fi
 if [ ! -f battery.conf ]; then
   echo "Configuration file not found, using default configuration";

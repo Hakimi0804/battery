@@ -78,9 +78,9 @@ calc_bathealth() {
 
 updater() {
   echo "${cyan}Updating battery-utils.sh...";
-  wget https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh -qO battery-utils.sh || update_err=1;
+  wget https://raw.githubusercontent.com/Hakimi0804/battery/master/battery-utils.sh --show-progress -qO battery-utils.sh || update_err=1;
   echo "Updating battery.sh...";
-  wget https://raw.githubusercontent.com/Hakimi0804/battery/master/battery.sh -qO battery.sh || update_err=1;
+  wget https://raw.githubusercontent.com/Hakimi0804/battery/master/battery.sh --show-progress -qO battery.sh || update_err=1;
   if [ "$update_err" = "1" ]; then
     echo "${red}Update failed, please try again later.";
     return 1;
