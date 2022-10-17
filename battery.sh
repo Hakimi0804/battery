@@ -16,6 +16,7 @@ path_temp="$nodepath/temp";
 path_voocchg_ing="$nodepath/voocchg_ing";
 path_fastcharger="$nodepath/fastcharger";
 path_batt_fcc="$nodepath/batt_fcc";
+text=()
 
 
 # sanity check
@@ -88,35 +89,35 @@ esac
 
 while true; do
 
-  echo "${cyan}General Info";
-  echo -e "${green}status  \t: ${bold_white}$status";
-  echo -e "${green}capacity\t: ${bold_white}${capacity}%";
-  echo -e "${green}current \t: ${bold_white}$current (${current//-/}mA)";
+  text+=("${cyan}General Info\n");
+  text+=("${green}status  \t: ${bold_white}$status\n");
+  text+=("${green}capacity\t: ${bold_white}${capacity}%\n");
+  text+=("${green}current \t: ${bold_white}$current (${current//-/}mA)\n");
 
   if [ "$config_voltage_unit" = "microvolt" ]; then
-    echo -e "${green}voltage \t: ${bold_white}${voltage}µV ($(bc -l <<< "$voltage / 1000" | sed 's/\..*//')mV)";
+    text+=("${green}voltage \t: ${bold_white}${voltage}µV ($(bc -l <<< "$voltage / 1000" | sed 's/\..*//')mV)\n");
   else
-    echo -e "${green}voltage \t: ${bold_white}${voltage}mV";
+    text+=("${green}voltage \t: ${bold_white}${voltage}mV\n");
   fi
 
   if [ "$config_voltage_usb_unit" = "microvolt" ]; then
-    echo -e "${green}USB voltage\t: ${bold_white}${voltage_usb}µV ($(bc -l <<< "$voltage_usb / 1000" | sed 's/\..*//')mV)";
+    text+=("${green}USB voltage\t: ${bold_white}${voltage_usb}µV ($(bc -l <<< "$voltage_usb / 1000" | sed 's/\..*//')mV)\n");
   else
-    echo -e "${green}USB voltage\t: ${bold_white}${voltage_usb}mV";
+    text+=("${green}USB voltage\t: ${bold_white}${voltage_usb}mV\n");
   fi
 
-  echo -e "${green}wattage \t: ${bold_white}${wattage}W";
-  echo -e "${green}USB wattage\t: ${bold_white}${wattage_usb}W";
-  echo -e "${green}temp \t\t: ${bold_white}$(echo -e $temp | sed 's/\B[0-9]\{1\}\>/.&/')";
+  text+=("${green}wattage \t: ${bold_white}${wattage}W\n");
+  text+=("${green}USB wattage\t: ${bold_white}${wattage_usb}W\n");
+  text+=("${green}temp \t\t: ${bold_white}$(echo -e $temp | sed 's/\B[0-9]\{1\}\>/.&/')\n");
 
   if [[ $config_enable_vooc == 1 ]]; then
-    echo -e "${green}voocchg_ing\t: ${bold_white}$voocchg_ing";
-    echo -e "${green}fastcharger\t: ${bold_white}$fastcharger";
+    text+=("${green}voocchg_ing\t: ${bold_white}$voocchg_ing\n");
+    text+=("${green}fastcharger\t: ${bold_white}$fastcharger\n");
   fi
 
   echo;
-  echo "${cyan}Health Info";
-  echo -e "${green}Battery Health\t: ${bold_white}$batt_fcc/$design_capacity (${batt_fcc_percentage}%)";
+  text+=("${cyan}Health Info\n");
+  text+=("${green}Battery Health\t: ${bold_white}$batt_fcc/$design_capacity (${batt_fcc_percentage}%)\n");
   
 
   current=$($PREFIX cat $path_current);
@@ -137,5 +138,11 @@ while true; do
   calc_bathealth;
 
   clear;
+
+  {
+    IFS=''
+    echo -e "${text[*]}";
+    unset text;
+  }
 
 done
