@@ -19,6 +19,7 @@
 # path_voocchg_ing="$nodepath/voocchg_ing"
 # path_fastcharger="$nodepath/fastcharger"
 # path_batt_fcc="$nodepath/batt_fcc"
+# path_cool_down="$nodepath/cool_down"
 #
 # Override them by either adding a new line of it below, or,
 # by uncommenting it and assigning your own value. The former

@@ -16,6 +16,7 @@ path_temp="$nodepath/temp";
 path_voocchg_ing="$nodepath/voocchg_ing";
 path_fastcharger="$nodepath/fastcharger";
 path_batt_fcc="$nodepath/batt_fcc";
+path_cool_down="$nodepath/cool_down";
 text=()
 
 
@@ -53,6 +54,7 @@ if [ "$default_nodepath" != "$new_nodepath" ]; then
   path_voocchg_ing="$new_nodepath/voocchg_ing";
   path_fastcharger="$new_nodepath/fastcharger";
   path_batt_fcc="$new_nodepath/batt_fcc";
+  path_cool_down="$new_nodepath/cool_down";
 fi
 
 
@@ -109,6 +111,7 @@ while true; do
   text+=("  ${green}wattage \t: ${bold_white}${wattage}W\n");
   text+=("  ${green}USB wattage\t: ${bold_white}${wattage_usb}W\n");
   text+=("  ${green}temp \t\t: ${bold_white}$(echo -e $temp | sed 's/\B[0-9]\{1\}\>/.&/')\n");
+  text+=("  ${green}cool_down\t: ${bold_white}${cool_down}\n");
 
   if [[ $config_enable_vooc == 1 ]]; then
     text+=("  ${green}voocchg_ing\t: ${bold_white}$voocchg_ing\n");
@@ -126,6 +129,7 @@ while true; do
   voltage=$($PREFIX cat $path_voltage);
   status=$($PREFIX cat $path_status);
   voltage_usb=$($PREFIX cat $path_voltage_usb);
+  cool_down=$($PREFIX cat $path_cool_down);
   
   if [[ $config_enable_vooc == 1 ]]; then
     voocchg_ing=$($PREFIX cat $path_voocchg_ing);
