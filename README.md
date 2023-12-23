@@ -19,15 +19,15 @@ bash battery.sh
 ## TROUBLESHOOTING
 
 ### design capacity is wrong
-Well, that's where the `battery.conf` file comes in handy. Use it to overwrite the default design capacity variable. Add this line to do so: 
+Use the script's config manager to change design capacity:
 ```bash
-design_capacity=your_device_design_capacity
+bash battery.sh -c set design_capacity your_device_design_capacity
 ```
 
 ### USB voltage is throwing error
 Just like design capacity, you can override the path. Most of the time this line should fix it: 
 ```bash
-path_voltage_usb="/sys/class/power_supply/usb/voltage_now"
+bash battery.sh -c set path_voltage_usb "/sys/class/power_supply/usb/voltage_now"
 ```
 
 ### wrong voltage reading
@@ -37,8 +37,8 @@ path_voltage_usb="/sys/class/power_supply/usb/voltage_now"
 Use one of the following lines depending on what voltage is broken (battery voltage/USB voltage)
 
 ```bash
-config_voltage_unit="microvolt/milivolt"
-config_voltage_unit_usb="microvolt/milivolt"
+bash battery.sh -c set config_voltage_unit "microvolt/milivolt"
+bash battery.sh -c set config_voltage_unit_usb "microvolt/milivolt"
 ```
 
 ## EXTRAS
@@ -86,7 +86,6 @@ path_batt_fcc="$nodepath/batt_fcc"
 
 ## CREDITS
 - myself
-- GitHub Copilot for the rounding function and generally giving accurate suggestion so that I don't have to type everything by hand
 - 🤷‍♂️
 - 🤷‍♂️
 - 🤷‍♂️
