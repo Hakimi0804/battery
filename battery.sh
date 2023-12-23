@@ -30,13 +30,6 @@ if [ ! -f battery.conf ]; then
   sleep 2;
 fi
 
-# Major refresh speed improvement
-if [ "$UID" = 0 ]; then
-    readonly PREFIX=""
-else
-    readonly PREFIX=sudo
-fi
-
 # shellcheck source=battery-utils.sh
 # shellcheck source=battery.conf
 source battery-utils.sh 2>/dev/null;
@@ -57,6 +50,10 @@ if [ "$default_nodepath" != "$new_nodepath" ]; then
   path_cool_down="$new_nodepath/cool_down";
 fi
 
+# Major refresh speed improvement
+if [ "$UID" != 0 ]; then
+  exec sudo bash "$0"
+fi
 
 if ! command -v termux-fix-shebang &>/dev/null && [[ $config_force_allow_for_non_termux != true ]]; then
   echo "You are not using Termux, exiting";
@@ -123,20 +120,20 @@ while true; do
   text+=("  ${green}Battery Health: ${bold_white}$batt_fcc/$design_capacity (${batt_fcc_percentage}%)\n");
   
 
-  current=$($PREFIX cat $path_current);
-  capacity=$($PREFIX cat $path_capacity);
-  temp=$($PREFIX cat $path_temp);
-  voltage=$($PREFIX cat $path_voltage);
-  status=$($PREFIX cat $path_status);
-  voltage_usb=$($PREFIX cat $path_voltage_usb);
-  cool_down=$($PREFIX cat $path_cool_down);
+  current=$(cat $path_current);
+  capacity=$(cat $path_capacity);
+  temp=$(cat $path_temp);
+  voltage=$(cat $path_voltage);
+  status=$(cat $path_status);
+  voltage_usb=$(cat $path_voltage_usb);
+  cool_down=$(cat $path_cool_down);
   
   if [[ $config_enable_vooc == 1 ]]; then
-    voocchg_ing=$($PREFIX cat $path_voocchg_ing);
-    fastcharger=$($PREFIX cat $path_fastcharger);
+    voocchg_ing=$(cat $path_voocchg_ing);
+    fastcharger=$(cat $path_fastcharger);
   fi
 
-  batt_fcc=$($PREFIX cat $path_batt_fcc);
+  batt_fcc=$(cat $path_batt_fcc);
   calc_wattage;
   calc_wattage usb;
   calc_bathealth;

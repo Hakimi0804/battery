@@ -14,8 +14,6 @@ curl https://raw.githubusercontent.com/Hakimi0804/battery/master/battery.sh -so 
 2. Execute it: 
 ```bash
 bash battery.sh
-# Or, the preferred way:
-sudo bash battery.sh # Will have faster refresh speed
 ```
 
 ## TROUBLESHOOTING
