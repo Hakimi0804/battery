@@ -17,10 +17,10 @@ fi
 
 if [ "$req_cmd_err" -eq 1 ]; then
   echo "Required commands not found, installing...";
-  pkg update -y &>/dev/null;
-  pkg upgrade -y &>/dev/null;
-  pkg update -y &>/dev/null;
-  pkg install -y tsu ncurses-utils wget bc &>/dev/null;
+  yes | pkg update &>/dev/null;
+  yes | pkg upgrade &>/dev/null;
+  yes | pkg update &>/dev/null;
+  yes | pkg install tsu ncurses-utils wget bc &>/dev/null;
 fi
 
 # colours
