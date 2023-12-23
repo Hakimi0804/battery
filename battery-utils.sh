@@ -10,7 +10,7 @@ for command in "${required_commands[@]}"; do
 done
 
 # Prevent from running without root access
-if [ -n "$(command -v sudo)" ] && ! sudo touch /cache/test &>/dev/null; then
+if [ -n "$(command -v sudo)" ] && ! sudo true &>/dev/null; then
   echo "Termux's sudo was found, but no root access available, exiting";
   exit 1;
 fi
